@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll</title>
+    <style>
+        body {
+    font-family: sans-serif;
+    background-color: green;
+}
+
+.container {
+    background-color: white;
+    width: 500px;
+    height: 300px;
+    border: 2px solid black;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 30px;
+    overflow-y: scroll;
+}
+
+.loading-container {
+    margin-top: 10px;
+    font-family: Cambria, Cochin, Georgia, 
+        Times, "Times New Roman", serif;
+    font-size: 30px;
+    text-align: center;
+}
+
+.search-data {
+    margin-top: 10px;
+    height: 30px;
+    font-family: Verdana, Geneva, 
+        Tahoma, sans-serif;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>GeeksforGeeks Infinite Scrolling</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed provident tempora quaerat aut ipsam illum quam dolor. Quos laboriosam praesentium illo id optio incidunt similique tempore, itaque esse eum velit! Aspernatur sed quaerat delectus eligendi facilis, suscipit perspiciatis quis repellendus. Sed eligendi vero quae dicta labore explicabo laborum fugiat eos. Provident similique eos tempora impedit nihil enim eligendi assumenda alias distinctio. Error, dicta adipisci. Sed perspiciatis ratione ea, sit ipsum, omnis corporis consequatur voluptates suscipit reprehenderit quia quam? Cum perspiciatis, ab est alias earum porro fugiat iste veniam sequi itaque fugit et soluta excepturi, libero blanditiis repellendus dolorem nihil labore hic minus dicta dolorum quod enim. Aliquam, ea? Tempore ipsa repudiandae, amet eveniet laborum fugit aliquam debitis repellendus eaque ab ad dicta esse distinctio quia illo consequatur architecto eligendi et doloremque adipisci. Labore cupiditate repudiandae illum consequatur illo vel consequuntur id, quasi minima at dignissimos dolore et amet, repellendus cumque est, aspernatur iste quibusdam molestiae? Eaque nam possimus cumque atque similique tenetur libero ipsum culpa neque suscipit nemo consequuntur maxime quidem fuga eligendi perspiciatis provident recusandae, ipsa, ullam illo obcaecati? Molestiae earum odio ipsam iste ducimus possimus, iure, nemo ut harum voluptates unde ea nisi illo sequi! Impedit illo minus libero deserunt asperiores laudantium doloribus minima deleniti excepturi, eaque eum optio officiis nisi commodi accusantium, quaerat sapiente facere iste laborum sint. Consequatur fugit repellat vero saepe, soluta, quis magni omnis repellendus aspernatur amet possimus aperiam nihil ea earum ipsa, iusto sunt officiis rem non dolor incidunt voluptas. Libero cupiditate, temporibus autem dignissimos rem, pariatur quasi culpa ullam labore quos accusamus, fugiat reiciendis! Nisi aliquam fugit, iste rem beatae error explicabo animi, assumenda maxime accusamus ipsam nemo ratione suscipit non excepturi! Vel iusto tenetur hic ad cupiditate nulla id dolore et, ipsum corporis fugiat autem excepturi laudantium voluptatum nam earum obcaecati?</p>
+        <div class="result-container"></div>
+        <div class="loading-container"></div>
+    </div>
+
+    <script>
+       let pageNum = 1;
+let isLoading = false;
+const container = document.querySelector(".container");
+const loadingContainer = document.querySelector(".loading-container");
+const resultContainer = document.querySelector(".result-container");
+
+async function fetchData() {
+    if (isLoading) return;
+    isLoading = true;
+    loadingContainer.innerHTML = "Loading ...";
+
+    try {
+        const response = await fetch(`https://api.../issues?page=${pageNum}`);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const finalRes = await response.json();
+        finalRes.forEach((item) => {
+            const resultDiv = document.createElement("div");
+            resultDiv.textContent = item.title;
+            resultDiv.classList.add("search-data");
+            resultContainer.appendChild(resultDiv);
+        });
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    } finally {
+        isLoading = false;
+        loadingContainer.innerHTML = "";
+    }
+}
+
+container.onscroll = () => {
+    if (isLoading) return;
+
+    if (
+        Math.ceil(container.clientHeight + container.scrollTop) >=
+        container.scrollHeight
+    ) {
+        pageNum++;
+        fetchData();
+    }
+};
+
+// Initial fetch when the page loads
+fetchData();
+
+
+    </script>
+</body>
+</html>

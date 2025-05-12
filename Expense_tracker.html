@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <style>
+    body{
+      font-family: sans-serif;
+    }
+    h1{
+      text-align: center;
+      font-size: 40px;
+    }
+    #container{
+      width: 25%;
+      border: 1px solid black;
+      padding:0px 0px 10px 10px ;
+      margin: 13% auto;
+      background: skyblue;
+    }
+    button{
+      font-size: 18px;
+      background: rgb(85, 84, 84);
+      border: 1.5px solid black;
+      color: white;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Expense Tracker</h1>
+
+  <div id="container">
+    <h2 id="balance">Total Income: 30000</h2>
+    <h2 id="expenses">Total Expenses: 0</h2>
+    <h2 id="remaining">Remaining Balance: 30000</h2>
+
+    <button id="addBtn">Add Expense</button>
+  </div>
+
+<script>
+    
+    const totalIncome = 30000;
+    let totalExpenses = 0;
+
+    const addBtn=document.querySelector('#addBtn')
+
+    addBtn.addEventListener('click',()=>{
+    const userInput = prompt('Enter your expense (or type "exit" to quit):');
+
+    // Exit 
+    if (userInput && userInput.toLowerCase() === 'exit') {
+      alert('Thank you for using the Expense Tracker!');
+      return;
+    }
+
+    // Convert input to number
+    const expense = Number(userInput);
+
+    if (isNaN(expense) || expense <= 0) {
+      alert('Invalid input. Please enter a valid amount.');
+      return;
+    }
+
+    // Update expenses
+    totalExpenses += expense;
+
+    document.getElementById('expenses').innerText = `Total Expenses: ${totalExpenses}`;
+    const remaining = totalIncome - totalExpenses;
+    document.getElementById('remaining').innerText = `Remaining Balance: ${remaining}`;
+
+    if (totalExpenses > totalIncome) {
+      alert('Warning! You have exceeded your total income!');
+    }
+  })
+
+  
+</script>
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .tab {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: grey;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+    .tab.active {
+      background-color: rgb(37, 37, 37);
+      color: white;
+    }
+    .tab-content {
+      display: none;
+      padding: 20px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div>
+  <div class="tab active" onclick="openTab('home')">Islamabad</div>
+  <div class="tab" onclick="openTab('about')">Delhi</div>
+  <div class="tab" onclick="openTab('contact')">Paris</div>
+</div>
+
+<div id="home" class="tab-content active">
+  <h3>Islamabad</h3>
+  <p>Islamabad is the capital of Pakistan and the famous place there is Faisal Mosque which is gifted by Saudi king Shah Faisal.</p>
+</div>
+
+<div id="about" class="tab-content">
+  <h3>Delhi</h3>
+  <p>Delhi is the capital of India and the famous place there is Red Fort made in reign of Mughal Emperor Shah Jahan.</p>
+</div>
+
+<div id="contact" class="tab-content">
+  <h3>Paris</h3>
+  <p>Paris is the capital of France and the famous place there is Eiffel Tower made by Gustava Eiffel.</p>
+</div>
+
+<script>
+  function openTab(tabId) {
+    // Hide all tab contents
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    // Remove active class from all tabs
+    const tabs = document.querySelectorAll('.tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+
+    // Show selected tab content
+    document.getElementById(tabId).classList.add('active');
+
+    // Set clicked tab as active
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

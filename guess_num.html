@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            width: 50%;
+            max-width: 800px;
+            min-width: 480px;
+            margin: 0 auto;
+        }
+        h1{
+            font-size: 35px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess The Number</h1>
+    <p>
+        You have to guess the number between 1 to 10
+    </p>
+
+    <div class="form">
+        <label for="guessField">
+            Enter a guess:
+        </label>
+
+        <input type="text" 
+               id="guessField" 
+               class="guessField">
+
+        <input type="submit" 
+               value="Submit" 
+               class="Submit" 
+               id="submit">
+    </div>
+
+    <script>
+
+
+        let guessValue=Math.floor(Math.random()*10 + 1);
+        console.log(guessValue)
+        let guess=1;
+
+        let sbtBtn=document.getElementById('submit');
+
+        sbtBtn.addEventListener('click',(e)=>{
+            e.preventDefault()
+            let value = document.getElementById('guessField').value;
+
+            if (value == guessValue){
+                alert(`Congrats! You guessed the number in ${guess} guesses`)
+            }else if(value > guessValue){
+                guess++;
+                alert('Try a Smaller Number')
+            }else{
+                guess++
+                alert("Sorry! Try a Greater number")
+            }
+        })
+    </script>
+</body>
+
+</html>

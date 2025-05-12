@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProgressBar</title>
+    <style>
+        h1 {
+            text-align: center;
+            font-size: 40px;
+        }
+        .container {
+            width: 30%;
+            padding: 20px;
+            margin: auto;
+            border: 2px solid gray;
+            text-align: center;
+        }
+        input {
+            padding: 8px;
+            width: 70%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 8px;
+            width: 20%;
+            cursor: pointer;
+            background:rgb(0, 106, 255);
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .progress-container {
+            width: 100%;
+            height: 20px;
+            background: lightgray;
+            margin-top: 10px;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: orange;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            line-height: 20px;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progress Bar</h1>
+    <div class="container">
+        <input type="number" id="input" placeholder="Enter Progress (0-100)">
+        <button id="submit">Submit</button>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+    </div>
+
+    <script>
+        const inputField = document.querySelector('#input');
+        const progressBar = document.querySelector('#progressBar');
+        const sbtBtn = document.querySelector('#submit');
+
+        sbtBtn.addEventListener('click', () => {
+            let progressValue = parseInt(inputField.value); 
+            
+            if (isNaN(progressValue) || progressValue < 0 || progressValue > 100) {
+                alert("Please enter a valid number between 0 and 100");
+                return;
+            }
+
+            progressBar.style.width = progressValue + "%";
+            progressBar.innerText = progressValue + "%"; 
+        });
+    </script>
+</body>
+</html>

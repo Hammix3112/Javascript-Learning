@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+</head>
+<body>
+    <h1>Random Quote Generator</h1>
+    <p id="p">Click! To Get Quote</p>
+    <button id="btn">Get Quote</button>
+
+    <script>
+        const apiUrl = "https://api.api-ninjas.com/v1/quotes";
+        const key = "C9SRncc0AGkADv1mxCqAZA==L5fgzoAOt7WbrtfW";
+        const para = document.querySelector("#p");
+        const btn = document.querySelector("#btn");
+
+        const getQuote = async ()=>{
+            try{
+                let response=await fetch(apiUrl,{
+                    method:"GET",
+                    headers:{
+                        'X-Api-key':key
+                    }
+                });
+                if(!response.ok){
+                    throw new error(`Error ${response.status}`);
+                }
+
+                let data=await response.json();
+                para.innerHTML=`"${data[0].quote}" - <h3>"${data[0].author}"<h3> `
+            }catch (error){
+                para.innerHTML='Failed to get quote.Try Again'
+                console.log('Error in fetching')
+            }
+        }
+        btn.addEventListener("click", getQuote);
+    </script>
+</body>
+</html>

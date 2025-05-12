@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Accordion</title>
+    <style>
+        body {
+            width: 70%;
+            margin: auto;
+        }
+        h1{
+            text-align: center;
+            font-size: 40px;
+        }
+        #main {
+            display: block;
+            font-size: 20px;
+        }
+        .p1 {
+            border: 1.3px solid black;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .p1 i {
+            float: right;
+            margin-right: 10px;
+            transition: transform 0.3s ease;
+        }
+        .container1 {
+            margin-top: -20px;
+            border: 1.3px solid black;
+            display: none;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accordian</h1>
+    <div id="main">
+        <p class="p1">Click it <i class="fa-solid fa-angle-down paraIcon"></i></p>
+        <div class="container1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid ipsum perferendis atque, minima dolorum repellendus omnis porro modi quia ut?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat possimus qui, minima quasi, optio saepe maxime non aspernatur vero commodi, animi neque omnis libero esse natus soluta! Iure, quaerat obcaecati.</div>
+        
+        <p class="p1">Click it <i class="fa-solid fa-angle-down paraIcon"></i></p>
+        <div class="container1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas facilis assumenda voluptates quia, praesentium sed corporis ad nesciunt velit vitae?Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat possimus qui, minima quasi, optio saepe maxime non aspernatur vero commodi, animi neque omnis libero esse natus soluta! Iure, quaerat obcaecati.</div>
+    </div>
+
+    <script>
+        const icons = document.querySelectorAll('.paraIcon');
+        const containerDiv = document.querySelectorAll('.container1');
+
+        icons.forEach((icon, idx) => {
+            icon.addEventListener('click', () => {
+                containerDiv.forEach((container, i) => {
+                    if (i !== idx) {
+                        container.style.display = 'none';
+                        icons[i].style.transform = 'rotate(0deg)'; 
+                    }
+                });
+
+                // icon
+                if (containerDiv[idx].style.display === 'block') {
+                    containerDiv[idx].style.display = 'none';
+                    icon.style.transform = 'rotate(0deg)';
+                } else {
+                    containerDiv[idx].style.display = 'block';
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

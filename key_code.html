@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Code</title>
+</head>
+<body>
+    <p>Press a key on the keyboard in the input field.</p>
+
+     <input type="text" size="40" onkeydown="myFunction(event)">
+
+     <p id="demo"></p>
+     <p id="demo2"></p>
+
+<script>
+    function myFunction(event) {
+        let key = event.key;
+        document.getElementById("demo").innerHTML = "The key was: " + key;
+        let code = event.keyCode;
+        document.getElementById("demo2").innerHTML = "The key was: " + code;
+}
+
+</script>
+</body>
+</html>
